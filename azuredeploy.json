@@ -258,7 +258,7 @@
                                     "pathPattern": "Devices.json",
                                     "storageAccounts": [
                                         {
-                                            "accountKey": "[listKeys(resourceId(concat('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]",
+                                            "accountKey": "[concat('HostName=', reference(resourceId('Microsoft.Devices/IoTHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).hostName, ';SharedAccessKeyName=iothubowner;SharedAccessKey=', listKeys(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).value[0].primaryKey)]",
                                             "accountName": "[variables('storageAccountName')]"
                                         }
                                     ]
@@ -283,7 +283,7 @@
                                     "pathPattern": "Rules.json",
                                     "storageAccounts": [
                                         {
-                                            "accountKey": "[listKeys(resourceId(concat('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]",
+                                            "accountKey": "[concat('HostName=', reference(resourceId('Microsoft.Devices/IoTHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).hostName, ';SharedAccessKeyName=iothubowner;SharedAccessKey=', listKeys(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).value[0].primaryKey)]",
                                             "accountName": "[variables('storageAccountName')]"
                                         }
                                     ]
@@ -309,11 +309,11 @@
                                 "properties": {
                                     "storageAccounts": [
                                         {
-                                            "accountName": "variable('storage')"
+                                            "accountName": "[variables('storageAccountName')]"
                                         }
                                     ],
                                     "container": "storagekaispe",
-                                    "pathPattern": "variables('storageAccountName')",
+                                    "pathPattern": "rulesEvaluation.json",
                                     "dateFormat": "yyyy/MM/dd",
                                     "timeFormat": "HH"
                                    
