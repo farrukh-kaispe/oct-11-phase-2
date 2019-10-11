@@ -258,7 +258,7 @@
                                     "pathPattern": "Devices.json",
                                     "storageAccounts": [
                                         {
-                                            "accountKey": "listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]",
+                                            "accountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]",
                                             "accountName": "[variables('storageAccountName')]"
                                         }
                                     ]
@@ -283,7 +283,7 @@
                                     "pathPattern": "Rules.json",
                                     "storageAccounts": [
                                         {
-                                            "accountKey": "listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]",
+                                            "accountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]",
                                             "accountName": "[variables('storageAccountName')]"
                                         }
                                     ]
