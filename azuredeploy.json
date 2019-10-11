@@ -133,7 +133,7 @@
                     "endpoints": {
                         "serviceBusQueues": [
                             {
-                                "connectionString": "[Concat('Endpoint=sb://',variables('serviceBus'),'.servicebus.windows.net/;SharedAccessKeyName=',variables('AuthRules_sb_queue'),';SharedAccessKey=',listkeys(variables('queueAuthorizationRuleResourceId'),variables('sbVersion')).primaryKey,';EntityPath=',variables('serviceBusQueue'))]",
+                                "connectionString": "[listKeys(resourceId(concat('Microsoft.ServiceBus/namespaces/AuthorizationRules'),variables('serviceBus'),'RootManageSharedAccessKey'),'2015-08-01').primaryConnectionString]",
                                 "name": "[variables('serviceBusQueue_endpoint')]",
                                 "resourceGroup": "[resourceGroup().Name]"
                             }
