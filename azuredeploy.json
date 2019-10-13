@@ -231,7 +231,7 @@
                                 "properties": {
                                     "consumerGroupName": "[variables('consumerGroupName')]",
                                     "iotHubNamespace": "[variables('iotHubName')]",
-                                    "sharedAccessPolicyKey": "[listKeys(resourceId(concat('Microsoft.Devices/IotHubs'), variables('iotHubName'), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).value[0].primaryKey)]",
+                                    "sharedAccessPolicyKey": "[listKeys(resourceId('Microsoft.Devices/IotHubs'), variables('iotHubName'), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).value[0].primaryKey]",
                                     "sharedAccessPolicyName": "iothubowner",
                                     "endpoint": "messages/events"
                                 },
