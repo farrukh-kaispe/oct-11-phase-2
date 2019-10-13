@@ -28,7 +28,6 @@
         "queueAuthorizationRuleResourceId": "[resourceId('Microsoft.ServiceBus/namespaces/queues/authorizationRules', variables('serviceBus'), variables('serviceBusQueue'), variables('AuthRules_sb_queue'))]",
         "storageAccountId": "[concat(resourceGroup().id,'/providers/Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
         "consumerGroupName": "streamingJobs"
-        
     },
     "resources": [
         {
@@ -42,7 +41,9 @@
                 "tier": "Basic"
             },
             "properties": {
-                
+                "provisioningState": "Succeeded",
+                "serviceBusEndpoint": "[concat('https://', variables('serviceBus'),'.servicebus.windows.net:443/')]",
+                "status": "Active"
             }
         },
         {
@@ -55,7 +56,6 @@
             ],
             "properties": {}
         },
-    
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2018-07-01",
@@ -222,7 +222,6 @@
                     "name": "Standard"
                 },
                 "eventsOutOfOrderPolicy": "Adjust",
-
                 "inputs": [
                     {
                         "name": "iotHubInput",
@@ -231,8 +230,8 @@
                                 "properties": {
                                     "consumerGroupName": "[variables('consumerGroupName')]",
                                     "iotHubNamespace": "[variables('iotHubName')]",
-                                    "sharedAccessPolicyKey":"[listkeys(resourceId('Microsoft.Devices/IotHubs/IotHubKeys',variables('iotHubName'), 'iothubowner'),'2018-04-01').primaryKey]",
-                                    "sharedAccessPolicyName": "iothubowner",
+                                    "sharedAccessPolicyKey":"[listkeys(resourceId('Microsoft.Devices/IotHubs/IotHubKeys',variables('iotHubName'), 'service'),'2018-04-01').primaryKey]",
+                                    "sharedAccessPolicyName": "service",
                                     "endpoint": "messages/events"
                                 },
                                 "type": "Microsoft.Devices/IotHubs"
@@ -252,7 +251,6 @@
                             "datasource": {
                                 "properties": {
                                     "container": "storagekaispe",
-                                   
                                     "pathPattern": "Devices.json",
                                     "storageAccounts": [
                                         {
@@ -315,9 +313,7 @@
                                     "pathPattern": "rulesEvaluation.json",
                                     "dateFormat": "yyyy/MM/dd",
                                     "timeFormat": "HH"
-                                   
                                 }
-                            
                             },
                             "serialization": {
                                 "type": "Json",
@@ -383,17 +379,16 @@
                             "connectionString": "[concat('HostName=', reference(resourceId('Microsoft.Devices/IoTHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).hostName, ';SharedAccessKeyName=iothubowner;SharedAccessKey=', listKeys(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).value[0].primaryKey)]",
                             "type": "Custom"
                         },
-                       {
-                           "name":"AzureServiceBusStr",
-                           "connectionString": "[listKeys(resourceId(concat('Microsoft.ServiceBus/namespaces/AuthorizationRules'),variables('serviceBus'),'RootManageSharedAccessKey'),'2015-08-01').primaryConnectionString]",
-                           "type":"Custom"
-                       },
-                       {
-                            "name":"AzureServiceBusQueue",
+                        {
+                            "name": "AzureServiceBusStr",
+                            "connectionString": "[listKeys(resourceId(concat('Microsoft.ServiceBus/namespaces/AuthorizationRules'),variables('serviceBus'),'RootManageSharedAccessKey'),'2015-08-01').primaryConnectionString]",
+                            "type": "Custom"
+                        },
+                        {
+                            "name": "AzureServiceBusQueue",
                             "connectionString": "[variables('serviceBusQueue')]",
-                            "type":"Custom"
-                        }          
-                        
+                            "type": "Custom"
+                        }
                     ]
                 }
             }
