@@ -16,6 +16,7 @@
     },
     "variables": {
         "storageAccountName": "[concat('storage', uniqueString(resourceGroup().id))]",
+        "storageAccountName2": "[concat('storageoutput', uniqueString(resourceGroup().id))]",
         "iotHubName": "[concat('IoTHub', uniqueString(resourceGroup().id))]",
         "streamingJob": "[concat('streamingJob', uniqueString(resourceGroup().id))]",
         "webAppName": "[concat('webApp', uniqueString(resourceGroup().id))]",
@@ -56,6 +57,20 @@
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2018-07-01",
             "name": "[variables('storageAccountName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [],
+            "sku": {
+                "name": "Standard_RAGRS"
+            },
+            "kind": "StorageV2",
+            "properties": {
+                "accessTier": "Hot"
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2018-07-01",
+            "name": "[variables('storageAccountName2')]",
             "location": "[parameters('location')]",
             "dependsOn": [],
             "sku": {
@@ -301,11 +316,11 @@
                                 "properties": {
                                     "storageAccounts": [
                                         {
-                                            "accountName": "[variables('storageAccountName')]",
-                                            "accountKey": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]"
+                                            "accountName": "[variables('storageAccountName2')]",
+                                            "accountKey": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName2'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName2')), '2015-05-01-preview').key1)]"
                                         }
                                     ],
-                                    "container": "storagekaispe",
+                                    "container": "RulesTrigger",
                                     "pathPattern": "rulesEvaluation.json",
                                     "dateFormat": "yyyy/MM/dd",
                                     "timeFormat": "HH"
