@@ -16,7 +16,7 @@
     },
     "variables": {
         "storageAccountName": "[concat('storage', uniqueString(resourceGroup().id))]",
-        "storageAccountName2": "[concat('storage', uniqueString(resourceGroup().id))]",
+        "storageAccountName2": "[concat('storageOutput', uniqueString(resourceGroup().id))]",
         "iotHubName": "[concat('IoTHub', uniqueString(resourceGroup().id))]",
         "streamingJob": "[concat('streamingJob', uniqueString(resourceGroup().id))]",
         "webAppName": "[concat('webApp', uniqueString(resourceGroup().id))]",
