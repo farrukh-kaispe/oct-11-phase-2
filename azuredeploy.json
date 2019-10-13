@@ -250,7 +250,7 @@
                                     "pathPattern": "Devices.json",
                                     "storageAccounts": [
                                         {
-                                            "accountKey": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]",
+                                            "accountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]",
                                             "accountName": "[variables('storageAccountName')]"
                                         }
                                     ]
@@ -275,7 +275,7 @@
                                     "pathPattern": "Rules.json",
                                     "storageAccounts": [
                                         {
-                                            "accountKey": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]",
+                                            "accountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]",
                                             "accountName": "[variables('storageAccountName')]"
                                         }
                                     ]
@@ -302,7 +302,7 @@
                                     "storageAccounts": [
                                         {
                                             "accountName": "[variables('storageAccountName')]",
-                                            "accountKey": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]"
+                                            "accountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
                                             
                                         }
                                     ],
