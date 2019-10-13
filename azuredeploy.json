@@ -40,11 +40,7 @@
                 "name": "Basic",
                 "tier": "Basic"
             },
-            "properties": {
-                "provisioningState": "Succeeded",
-                "serviceBusEndpoint": "[concat('https://', variables('serviceBus'),'.servicebus.windows.net:443/')]",
-                "status": "Active"
-            }
+            "properties": {}
         },
         {
             "type": "Microsoft.ServiceBus/namespaces/queues",
@@ -230,8 +226,8 @@
                                 "properties": {
                                     "consumerGroupName": "[variables('consumerGroupName')]",
                                     "iotHubNamespace": "[variables('iotHubName')]",
-                                    "sharedAccessPolicyKey":"[listkeys(resourceId('Microsoft.Devices/IotHubs/IotHubKeys',variables('iotHubName'), 'service'),'2018-04-01').primaryKey]",
-                                    "sharedAccessPolicyName": "service",
+                                    "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Devices/IotHubs/IotHubKeys',variables('iotHubName'), 'iothubowner'),'2018-04-01').primaryKey]",
+                                    "sharedAccessPolicyName": "iothubowner",
                                     "endpoint": "messages/events"
                                 },
                                 "type": "Microsoft.Devices/IotHubs"
@@ -309,7 +305,7 @@
                                             "accountKey": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]"
                                         }
                                     ],
-                                    "container": "storagekaispe",
+                                    "container": "rulesContainer",
                                     "pathPattern": "rulesEvaluation.json",
                                     "dateFormat": "yyyy/MM/dd",
                                     "timeFormat": "HH"
